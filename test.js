@@ -14,6 +14,7 @@ describe("ExcelAddressFormat", function() {
 	it('toNumberFormat valid input', function() {
 		assert.equal(address.toNumberFormat('A4'), 'R4C1');
 		assert.equal(address.toNumberFormat('B5'), 'R5C2');
+		assert.equal(address.toNumberFormat('GY52'), 'R52C207');
 	});
 
 	it('toNumberFormat invalid input', function() {
