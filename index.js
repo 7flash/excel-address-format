@@ -1,5 +1,5 @@
 var alphabetAddressPattern = /^([A-Z]+)(\d)+$/;
-var numberAddressPattern = /^R(\d+)C(\d+)$/;
+var numberAddressPattern = /^R(\d+)C(\d+)+$/;
 
 exports.toAlphabetFormat = toAlphabetFormat;
 exports.toNumberFormat = toNumberFormat;

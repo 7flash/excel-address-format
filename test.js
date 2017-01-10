@@ -41,9 +41,9 @@ describe("ExcelAddressFormat", function() {
 	});
 
 	it('numberToLetter should convert number to excel letter', function() {
-		assert.equal(address.numberToLetter(0), -1);
 		assert.equal(address.numberToLetter(1), 'A');
 		assert.equal(address.numberToLetter(27), 'AA');
+		assert.equal(address.numberToLetter(0), -1);
 		assert.equal(address.numberToLetter('A'), -1);
 	});
 
