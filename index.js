@@ -1,45 +1,51 @@
-var XLSX = require('xlsx-styles');
-var workbook = XLSX.readFile('input/test.XLSX');
-var sheet_name_list = workbook.SheetNames;
+var alphabetAddressPattern = /^([A-Z]+)(\d)+$/;
+var numberAddressPattern = /^R(\d+)C(\d+)$/;
 
-var alphabetAddressPattern = /^([A-Z]+)(\d)$/;
-var numberAddressPattern = /^R((\d)+)C((\d)+)$/;
+exports.toAlphabetFormat = toAlphabetFormat;
+exports.toNumberFormat = toNumberFormat;
+exports.isNumberAddress = isNumberAddress;
+exports.isAlphabetAddress = isAlphabetAddress;
+exports.letterToNumber = letterToNumber;
+exports.numberToLetter = numberToLetter;
+exports.getRow = getRow;
+exports.getColumn = getColumn;
 
-function toAlphabetFormat(numberAddress) {
+function toAlphabetFormat (numberAddress) {
 	if(!isNumberAddress(numberAddress)) return false;
-
+	
 	var row = parseInt(getRow(numberAddress));
-
-	var column = parseInt(getColumn(numberAddress)) - 1;
+	
+	var column = parseInt(getColumn(numberAddress));
 	var columnLetter = numberToLetter(column);
 
 	var alphabetFormattedIndex = columnLetter.concat(row);
 	return alphabetFormattedIndex;
 }
 
-function toNumberFormat(alphabetAddress) {
+function toNumberFormat (alphabetAddress) {
 	if(!isAlphabetAddress(alphabetAddress)) return false;
 
 	var row = parseInt(getRow(alphabetAddress));
-
+	
 	var columnLetter = getColumn(alphabetAddress);
-	var column = parseInt(letterToNumber(columnLetter)) + 1;
+	var column = parseInt(letterToNumber(columnLetter));
 
 	var numberFormattedIndex = 'R'+row+'C'+column;
 	return numberFormattedIndex;
 }
 
 function letterToNumber(letter) {
-	var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';	
+	if(!/^[A-Z]+$/.test(letter)) return -1;
 	var sum = 0;
-	for(var i = 0; i < alphabet.length; i++) {
+	for(var i = 0; i < letter.length; i++) {
 		sum *= 26;
-		sum += (alphabet.charCodeAt(i) - ("A".charCodeAt(0)-1));
+		sum += (letter.charCodeAt(i) - ("A".charCodeAt(0)-1));
 	}
 	return sum;
 }
 
 function numberToLetter(number) {
+    if(!/^\d+$/.test(number) || number == 0) return -1;
     var dividend = number;
     var columnName = "";
     var modulo;
@@ -82,47 +88,3 @@ function getRow(address) {
 	}
 	return -1;
 }
-
-function getBlocks(worksheet) {
-	console.log(toNumberFormat("B5"));
-	console.log(toAlphabetFormat("R4C1"));
-	return [];
-
-	var bounds = worksheet['!ref'];
-	var numberFormattedBounds = toNumberFormat(bounds);
-	var maxColumn = getColumn(numberFormattedBounds);
-	var maxRow = getRow(numberFormattedBounds);
-
-	var blocks = {};
-	var startColumn = 5;
-	var startRow = 8;
-	var columnSize = 5; 
-	var rowSize = 7;
-
-	var currentColumn = startColumn;
-	var currentRow = startRow;
-	while(true) {
-		var block = {};
-		
-		currentRow += rowSize;
-	}
-}
-
-function parseBlock() {
-
-}
-
-sheet_name_list.forEach(function(y) {
-	var worksheet = workbook.Sheets[y];
-	getBlocks(worksheet, function(blocks) {
-		blocks.forEach(item, function(block) {
-			
-		});
-	});
-	/*
-	var index = cellIndexFormat('R1C1') + ':' + cellIndexFormat('R1C2');
-	console.log(index);
-	console.log(worksheet[index].v);
-	*/
-	console.log(worksheet);
-});

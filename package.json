@@ -1,13 +1,16 @@
 {
   "name": "excel-address-format",
-  "version": "1.0.0",
-  "description": "Convert Common Spreadsheet Format (CSF - R4C1) to format with columns as letters(B5) and backwards",
+  "version": "1.0.1",
+  "description": "Convert Common Spreadsheet Format (CSF - R4C1) to format with letter-representation of columns(A5) and backwards",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test.js"
   },
   "author": "Berlenko Igor",
   "license": "MIT",
-  "dependencies": {
-  }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/7flash/excel-address-format.git"
+  },
+  "dependencies": {}
 }
