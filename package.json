@@ -1,6 +1,6 @@
 {
   "name": "excel-address-format",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Convert Common Spreadsheet Format (CSF - R4C1) to format with letter-representation of columns(A5) and backwards",
   "main": "index.js",
   "scripts": {
