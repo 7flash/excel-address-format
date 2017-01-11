@@ -4,13 +4,16 @@ var address = require('./index');
 describe('Excel Address Converter', function() {
 	describe('CSF to LBSF conversion', function() {
 		it('should return correct converted values from CSF to LBSF', function() {
-			assert.equal(address.toAlphabetFormat('R4C1'), 'A4');
-			assert.equal(address.toAlphabetFormat('R1C1'), 'A1');
+			assert.equal(address.toLetterFormat('R1C1'), 'A1');
+			assert.equal(address.toLetterFormat('R100C100'), 'CV100');
 		});
 
-		it('should return false for not-CSF input values', function() {
-			assert.equal(address.toAlphabetFormat('B5'), false);
-			assert.equal(address.toAlphabetFormat('XXX'), false);
+		it('should return not-changed LBSF values', function() {
+			assert.equal(address.toLetterFormat('B5'), 'B5');
+		});
+
+		it('should return false for wrong values', function() {
+			assert.equal(address.toLetterFormat('XXX'), false);
 		});
 	});
 
@@ -21,8 +24,12 @@ describe('Excel Address Converter', function() {
 			assert.equal(address.toNumberFormat('GY52'), 'R52C207');
 		});
 
-		it('should return false for not-LBSF input values', function() {
-			assert.equal(address.toNumberFormat('R4C1'), false);
+		it('should return not-changed CSF values', function() {
+			assert.equal(address.toNumberFormat('R1C1'), 'R1C1');
+		});
+
+		it('should return false for wrong values', function() {
+			assert.equal(address.toNumberFormat('XXX'), false);
 		});
 	});
 
@@ -95,7 +102,7 @@ describe('Excel Address Converter', function() {
 				assert.equal(address.getColumn('R4C1'), '1');
 			});
 
-			it('should return column from LBSD address', function() {
+			it('should return column from LBSF address', function() {
 				assert.equal(address.getColumn('B5'), 'B');
 				assert.equal(address.getColumn('AA100'), 'AA');
 			});

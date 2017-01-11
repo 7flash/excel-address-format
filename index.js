@@ -1,7 +1,4 @@
-var alphabetAddressPattern = /^([A-Z]+)(\d+)$/;
-var numberAddressPattern = /^R(\d+)C(\d+)$/;
-
-exports.toAlphabetFormat = toAlphabetFormat;
+exports.toLetterFormat = toLetterFormat;
 exports.toNumberFormat = toNumberFormat;
 exports.isNumberAddress = isNumberAddress;
 exports.isAlphabetAddress = isAlphabetAddress;
@@ -10,24 +7,39 @@ exports.numberToLetter = numberToLetter;
 exports.getRow = getRow;
 exports.getColumn = getColumn;
 
-function toAlphabetFormat (numberAddress) {
-	if(!isNumberAddress(numberAddress)) return false;
+var alphabetAddressPattern = /^([A-Z]+)(\d+)$/;
+var numberAddressPattern = /^R(\d+)C(\d+)$/;
+
+function toLetterFormat (address) {
+	if(!isNumberAddress(address)) {
+		if(isAlphabetAddress(address)) {
+			return address;
+		} else {
+			return false;
+		}
+	}
 	
-	var row = parseInt(getRow(numberAddress));
+	var row = parseInt(getRow(address));
 	
-	var column = parseInt(getColumn(numberAddress));
+	var column = parseInt(getColumn(address));
 	var columnLetter = numberToLetter(column);
 
 	var alphabetFormattedIndex = columnLetter.concat(row);
 	return alphabetFormattedIndex;
 }
 
-function toNumberFormat (alphabetAddress) {
-	if(!isAlphabetAddress(alphabetAddress)) return false;
+function toNumberFormat (address) {
+	if(!isAlphabetAddress(address)) {
+		if(isNumberAddress(address)) {
+			return address;
+		} else {
+			return false;
+		}
+	}
 
-	var row = parseInt(getRow(alphabetAddress));
+	var row = parseInt(getRow(address));
 	
-	var columnLetter = getColumn(alphabetAddress);
+	var columnLetter = getColumn(address);
 	var column = parseInt(letterToNumber(columnLetter));
 
 	var numberFormattedIndex = 'R'+row+'C'+column;
