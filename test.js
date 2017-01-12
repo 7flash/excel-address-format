@@ -2,6 +2,26 @@ var assert = require('assert');
 var address = require('./index');
 
 describe('Excel Address Converter', function() {
+	describe('CSF address generation', function() {
+		it('should return correct CSF value corresponding to row and column', function() {
+			assert.equal(address.generateNumberAddress(1, 1), 'R1C1');	
+		});
+
+		it('should return false for incorrect row or column values', function() {
+			assert.equal(address.generateNumberAddress(-1, -1), false);
+		});
+	});
+
+	describe('LBSF address generation', function() {
+		it('should return correct LBSF value corresponding to row and column', function() {
+			assert.equal(address.generateLetterAddress(1, 1), 'A1');
+		});
+
+		it('should return false for incorrect row or column values', function() {
+			assert.equal(address.generateLetterAddress(-1, -1), false);
+		});
+	});
+
 	describe('CSF to LBSF conversion', function() {
 		it('should return correct converted values from CSF to LBSF', function() {
 			assert.equal(address.toLetterFormat('R1C1'), 'A1');

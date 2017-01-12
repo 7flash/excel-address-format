@@ -6,9 +6,23 @@ exports.letterToNumber = letterToNumber;
 exports.numberToLetter = numberToLetter;
 exports.getRow = getRow;
 exports.getColumn = getColumn;
+exports.generateLetterAddress = generateLetterAddress;
+exports.generateNumberAddress = generateNumberAddress;
 
 var alphabetAddressPattern = /^([A-Z]+)(\d+)$/;
 var numberAddressPattern = /^R(\d+)C(\d+)$/;
+
+function generateLetterAddress(row, column) {
+	if(!Number.isInteger(row) || !Number.isInteger(column)) return false;
+	if(row < 0 || column < 0) return false;
+	return numberToLetter(column).concat(column);
+}
+
+function generateNumberAddress(row, column) {
+	if(!Number.isInteger(row) || !Number.isInteger(column)) return false;
+	if(row < 0 || column < 0) return false;
+	return "R"+row+"C"+column;
+}
 
 function toLetterFormat (address) {
 	if(!isNumberAddress(address)) {
