@@ -1,6 +1,6 @@
 {
   "name": "excel-address-format",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Convert Common Spreadsheet Format (CSF - R4C1) to Letter Based Spreadsheet Format(LBSF - A5) and backwards",
   "main": "index.js",
   "scripts": {
