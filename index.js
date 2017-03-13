@@ -73,16 +73,16 @@ function letterToNumber(letter) {
 function numberToLetter(number) {
     if(!/^\d+$/.test(number) || number == 0) return -1;
     var dividend = number;
-    var columnName = "";
+    var result = "";
     var modulo;
 
     while (dividend > 0)
     {
         modulo = (dividend - 1) % 26;
-        columnName = String.fromCharCode(65 + modulo).toString() + columnName;
+        result = String.fromCharCode(65 + modulo).toString() + result;
         dividend = parseInt((dividend - modulo) / 26);
     } 
-    return columnName;
+    return result;
 }
 
 function isNumberAddress(address) {
