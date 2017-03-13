@@ -15,6 +15,7 @@ describe('Excel Address Converter', function() {
 	describe('LBSF address generation', function() {
 		it('should return correct LBSF value corresponding to row and column', function() {
 			assert.equal(address.generateLetterAddress(1, 1), 'A1');
+            assert.equal(address.generateLetterAddress(3, 2), 'B3');
 		});
 
 		it('should return false for incorrect row or column values', function() {

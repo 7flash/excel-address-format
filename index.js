@@ -15,7 +15,7 @@ var numberAddressPattern = /^R(\d+)C(\d+)$/;
 function generateLetterAddress(row, column) {
 	if(!Number.isInteger(row) || !Number.isInteger(column)) return false;
 	if(row < 0 || column < 0) return false;
-	return numberToLetter(column).concat(column);
+	return numberToLetter(column).concat(row);
 }
 
 function generateNumberAddress(row, column) {
